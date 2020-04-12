@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586616324424.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2009489845",
+    "id" : "193187B3",
+    "lastKnownWriteTime" : 1586670669,
+    "last_content_update" : 1586670669908,
+    "path" : "G:/HOC_DAI_HOC/Hoc_linhtinh/Causal Inference/notebookCEVAE/index.Rmd",
+    "project_path" : "index.Rmd",
+    "properties" : {
+        "cursorPosition" : "25,42",
+        "scrollLine" : "15"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,48 @@
+--- 
+title: "A notebook Paper Causal Effect Inference with Deep Latent-Variable Models"
+author: "Trong-Thang Pham"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a notebook I write about CEVAE original paper."
+---
+
+# Overview
+
+This is a notebook I write about CEVAE original paper [@louizos2017causal]. Some grammar mistakes are going to be made.
+
+The authors' source code: <https://github.com/AMLab-Amsterdam/CEVAE>
+
+Here is some background knowledge that will help you to understand the whole paper.
+
+## Keywords
+
+- **proxy, or proxy variable**: is a variable that represents for confounders, indirectly help on finding causal effect of confounders.
+- **Recognition network**: is the encoder of VAE, can also be called inference model
+- **Deep Latent-Variable Models (DLVM)**: denote a LVM $P_\theta(x,z)$ whose distribution are parameterized by neural net
+- **Covariate**: a variable can be used to predict the outcome
+- **Ignorability**: outcome does not depend on missing data
+- [**Observational study**](https://www.ctu.mrc.ac.uk/patients-public/about-clinical-trials/what-is-an-observational-study/): They are called observational studies because the investigator observes individuals without manipulation or intervention.
+- **Randomised controlled trials (RCT), or Randomized trial**: this trial require many people, then randomly split into 2 groups, investigators do intervene (give treatment in 1 group) and look at the effects of the intervention on an outcome.
+- **Within-sample**: run experiment on train/val set
+- **Out-of-sample**: run experiment on test set
+- **Causal inference**: focus on effect of treatment on the outcome, even though we only know the result from 1 side (get treatment or not), this is factual results. In this paper, we care about produce a result from the other side, which is not real, we called it counterfactual. We do that by learning a generative model, then intervene the treatment variable and collect new results, those are our counterfactual results.
+- Treatment group: the group get the treatment, for example doing physical exercise.
+- Control group: the group don't get the treatment, for example just sleep all day long.
+
+## Distinguishing do() and cond():
+
+cond() is a notation I made up to stand for "is conditioned on". For example, y is conditioned on x, then I call it y cond(x). Actually using y|x is more elegant but if we talking normally without the y, using | or |x is too short, in my opinion.
+
+do() is represented for an action called *intervent*. Intervene is used to show causality. Says we only sure A cause B if and only if (iff) A is there, B behave this, but without A, B behave differently.
+
+Counterfactual problem: In reality, each individual could only be in control or treatment group. When we talk about P(b|a), we are looking at if a=0 or a=1 in general view. We can't be sure how it behave for each individual. That's why we need to seek a new view to inference that individual effect. Intervene is an action change the treatment value (from treat to control, or vice versa) in order to observe how individual situation different from the origin treatment.
+
+For example: Patient x didn't get his treatment and died (for very long time ago). What is the outcome if he get his treatment? If we base on p(b|a) to answer, then it is just indirect way. The direct way is p(b|do(a)).
+
+It's sound pretty abstract because how can we intervene when it've already happened. We can't in real life, but we can approximate that if we correcty model the causal effect of it. That's why we have this study.
+
+Anyway there is another view from how to compute do() and cond(). We compute p(b|a) when we sample both a and b, then cond(a). do(a) is when we fix value of a in the beginning, then sample b. Those two operations can have the same value, but not in all cases. Some aspect we can only discover iff we put do() on it.

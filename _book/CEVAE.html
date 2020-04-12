@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Causal effect variational autoencoder | A notebook Paper Causal Effect Inference with Deep Latent-Variable Models</title>
+  <meta name="description" content="This is a notebook I write about CEVAE original paper." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Causal effect variational autoencoder | A notebook Paper Causal Effect Inference with Deep Latent-Variable Models" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a notebook I write about CEVAE original paper." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Causal effect variational autoencoder | A notebook Paper Causal Effect Inference with Deep Latent-Variable Models" />
+  
+  <meta name="twitter:description" content="This is a notebook I write about CEVAE original paper." />
+  
+
+<meta name="author" content="Trong-Thang Pham" />
+
+
+<meta name="date" content="2020-04-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="indentify.html"/>
+<link rel="next" href="exp.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#keywords"><i class="fa fa-check"></i><b>1.1</b> Keywords</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#distinguishing-do-and-cond"><i class="fa fa-check"></i><b>1.2</b> Distinguishing do() and cond():</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#abstract"><i class="fa fa-check"></i><b>2.1</b> Abstract</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#old-study"><i class="fa fa-check"></i><b>2.2</b> Old study:</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#propose"><i class="fa fa-check"></i><b>2.3</b> Propose</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="indentify.html"><a href="indentify.html"><i class="fa fa-check"></i><b>3</b> Identification of causal effect</a><ul>
+<li class="chapter" data-level="3.1" data-path="indentify.html"><a href="indentify.html#identifying-individual-treatment-effect"><i class="fa fa-check"></i><b>3.1</b> Identifying individual treatment effect</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="CEVAE.html"><a href="CEVAE.html"><i class="fa fa-check"></i><b>4</b> Causal effect variational autoencoder</a></li>
+<li class="chapter" data-level="5" data-path="exp.html"><a href="exp.html"><i class="fa fa-check"></i><b>5</b> Experiments</a><ul>
+<li class="chapter" data-level="5.1" data-path="exp.html"><a href="exp.html#benchmark-dataset"><i class="fa fa-check"></i><b>5.1</b> Benchmark dataset</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="exp.html"><a href="exp.html#ihdp"><i class="fa fa-check"></i><b>5.1.1</b> IHDP</a></li>
+<li class="chapter" data-level="5.1.2" data-path="exp.html"><a href="exp.html#jobs"><i class="fa fa-check"></i><b>5.1.2</b> Jobs:</a></li>
+<li class="chapter" data-level="5.1.3" data-path="exp.html"><a href="exp.html#synthesis-toy-data"><i class="fa fa-check"></i><b>5.1.3</b> Synthesis toy data:</a></li>
+<li class="chapter" data-level="5.1.4" data-path="exp.html"><a href="exp.html#binary-treatment-outcome-on-twins"><i class="fa fa-check"></i><b>5.1.4</b> Binary treatment outcome on Twins</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A notebook Paper Causal Effect Inference with Deep Latent-Variable Models</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="CEVAE" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Causal effect variational autoencoder</h1>
+<p>Question from the title:</p>
+<ul>
+<li>Why use VAE?</li>
+<li>Why use the propose architecture?</li>
+<li>Why use that constant and this prior?</li>
+<li>What is the loss, how define, what is the term, why is that?</li>
+</ul>
+<p>Let’s remind ourself about VAE:
+<img src="imgs/2020-04-12-10-49-37.png" /></p>
+<ul>
+<li>Why use VAE?</li>
+</ul>
+<blockquote>
+<p>The authors didn’t explain much. I guess they want to use the similar idea of finding hidden variable. And it’s more resonable when VAE (VCG) can recover many model.</p>
+</blockquote>
+<p>The architectures:
+<img src="imgs/2020-04-12-10-54-13.png" /></p>
+<p><img src="imgs/2020-04-12-10-55-45.png" /></p>
+<p>Note: no matter how, Y is influenced by T.</p>
+<p>Then the authors:</p>
+<ul>
+<li>Assume that obs factorize conditioned on latent variable</li>
+<li>Using inference network follow a factorization of <em>the true posterior</em></li>
+<li><p>Using generative network architecture inspired by TARnet, but instead of conditioning on observations we condition on the latent variables z</p></li>
+<li><p>True posterior ?</p></li>
+</ul>
+<blockquote>
+<p>It took me a while to understand. The idea is using chain rule
+<span class="math display">\[Q(z,y,t|x) = Q(z|x,t,y)Q(y|x,t)Q(t|x)\]</span></p>
+</blockquote>
+<ul>
+<li>Why we choose those term?</li>
+</ul>
+<blockquote>
+<p>In the case <span class="math inline">\(Q(z,y,t|x)\)</span>, maybe it is the consequence of choosing the architecture of model, which is inspired by TARNet, z impact on x,y,t so now to compute posterior we have to condition on those. Moreover, I can see that the authors want to use all data they got to find z. Other terms are unclear to me.</p>
+</blockquote>
+<ul>
+<li>What is “instead of conditioning on observations we condition on the latent variables z” ?</li>
+</ul>
+<blockquote>
+<p>The authors trying to different the original model TARNet, in the original they only condition on x to compute y, now we use z instead (paragraph 2 part 4 paper <span class="citation">(Shalit, Johansson, and Sontag <a href="#ref-shalit2016estimating">2016</a>)</span>)
+<span class="math display">\[\begin{aligned}
+&amp;y_{i} \sim p\left(Y_{1} | x_{i}\right) \text { if } t_{i}=1\\
+&amp;y_{i} \sim p\left(Y_{0} | x_{i}\right) \text { if } t_{i}=0
+\end{aligned}\]</span></p>
+</blockquote>
+<ul>
+<li>What is TARNet?</li>
+</ul>
+<blockquote>
+<p>TARNet is a network using neural network to capture relationship, a feed forward network.
+<img src="imgs/2020-04-12-11-24-44.png" />
+Integral Probability Metric (IPM) measure of distance between two distributions p(x|t = 0), and p(x|t = 1)
+Objective:
+<img src="imgs/2020-04-12-11-25-11.png" />
+<span class="math inline">\(\alpha &gt; 0\)</span> then called CFR, <span class="math inline">\(alpha= 0\)</span> is TARNet (remove the IPM term)
+Algorithm to learn CFR (remove IPM is TARnet).
+<img src="imgs/2020-04-12-11-27-20.png" />
+<img src="imgs/2020-04-12-11-27-45.png" /></p>
+</blockquote>
+<ul>
+<li>Why do we use nn in eevry place?</li>
+</ul>
+<blockquote>
+<p>The authors probably want using the flexible of nn to capture relationships.</p>
+</blockquote>
+<p>The define prior and density part are pretty detail, readers can read in the paper. But there are question as well.</p>
+<ul>
+<li>What is switching mean?</li>
+</ul>
+<blockquote>
+<p>It is basically the ta + (t-1)b part, meaning switch between a or b base on t status.</p>
+</blockquote>
+<ul>
+<li>Why use <span class="math inline">\(N(0,1)\)</span> as prior to z? Can we change it?</li>
+</ul>
+<blockquote>
+<p>Yes, we can change, readers will see that in toy benchmark later. It is just a way to define z.</p>
+</blockquote>
+<ul>
+<li>Why we need two <span class="math inline">\(g()\)</span> in guide, when only need 1 <span class="math inline">\(f()\)</span> in model?</li>
+</ul>
+<blockquote>
+<p>In guide we want to use x,y to learn about z. X consist of all kind of distribution, e.g categorical, normal, binomial …, that’s why we need an neural network to learn the representation space first, then apply encode network. In model our z is just one distribution, so no need of second network.</p>
+</blockquote>
+<ul>
+<li>Why does the lower bound have formula like that?</li>
+</ul>
+<blockquote>
+<p><img src="imgs/2020-04-12-11-39-06.png" />
+Note: <span class="math inline">\(log p(x)\)</span> independ to q, so we consider it is a constant. If we see x as the tuple x,y,t then the <span class="math inline">\(\mathcal{L}\)</span> becomes the lower bound we saw in the paper.</p>
+</blockquote>
+<ul>
+<li>What does auxiliary distributions mean?</li>
+</ul>
+<blockquote>
+<p><img src="imgs/2020-04-12-11-42-13.png" />
+We know that VAE only encode X to z, then z decode to output. In our case, our guide need addition y,t to compute z. That’s why the authors said we need to predict those two.</p>
+</blockquote>
+
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-shalit2016estimating">
+<p>Shalit, Uri, Fredrik D. Johansson, and David Sontag. 2016. “Estimating Individual Treatment Effect: Generalization Bounds and Algorithms.” <a href="http://arxiv.org/abs/1606.03976">http://arxiv.org/abs/1606.03976</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="indentify.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["notebookCEVAE.pdf", "notebookCEVAE.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

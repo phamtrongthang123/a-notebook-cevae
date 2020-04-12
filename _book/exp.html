@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Experiments | A notebook Paper Causal Effect Inference with Deep Latent-Variable Models</title>
+  <meta name="description" content="This is a notebook I write about CEVAE original paper." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Experiments | A notebook Paper Causal Effect Inference with Deep Latent-Variable Models" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a notebook I write about CEVAE original paper." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Experiments | A notebook Paper Causal Effect Inference with Deep Latent-Variable Models" />
+  
+  <meta name="twitter:description" content="This is a notebook I write about CEVAE original paper." />
+  
+
+<meta name="author" content="Trong-Thang Pham" />
+
+
+<meta name="date" content="2020-04-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="CEVAE.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#keywords"><i class="fa fa-check"></i><b>1.1</b> Keywords</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#distinguishing-do-and-cond"><i class="fa fa-check"></i><b>1.2</b> Distinguishing do() and cond():</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#abstract"><i class="fa fa-check"></i><b>2.1</b> Abstract</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#old-study"><i class="fa fa-check"></i><b>2.2</b> Old study:</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#propose"><i class="fa fa-check"></i><b>2.3</b> Propose</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="indentify.html"><a href="indentify.html"><i class="fa fa-check"></i><b>3</b> Identification of causal effect</a><ul>
+<li class="chapter" data-level="3.1" data-path="indentify.html"><a href="indentify.html#identifying-individual-treatment-effect"><i class="fa fa-check"></i><b>3.1</b> Identifying individual treatment effect</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="CEVAE.html"><a href="CEVAE.html"><i class="fa fa-check"></i><b>4</b> Causal effect variational autoencoder</a></li>
+<li class="chapter" data-level="5" data-path="exp.html"><a href="exp.html"><i class="fa fa-check"></i><b>5</b> Experiments</a><ul>
+<li class="chapter" data-level="5.1" data-path="exp.html"><a href="exp.html#benchmark-dataset"><i class="fa fa-check"></i><b>5.1</b> Benchmark dataset</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="exp.html"><a href="exp.html#ihdp"><i class="fa fa-check"></i><b>5.1.1</b> IHDP</a></li>
+<li class="chapter" data-level="5.1.2" data-path="exp.html"><a href="exp.html#jobs"><i class="fa fa-check"></i><b>5.1.2</b> Jobs:</a></li>
+<li class="chapter" data-level="5.1.3" data-path="exp.html"><a href="exp.html#synthesis-toy-data"><i class="fa fa-check"></i><b>5.1.3</b> Synthesis toy data:</a></li>
+<li class="chapter" data-level="5.1.4" data-path="exp.html"><a href="exp.html#binary-treatment-outcome-on-twins"><i class="fa fa-check"></i><b>5.1.4</b> Binary treatment outcome on Twins</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A notebook Paper Causal Effect Inference with Deep Latent-Variable Models</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exp" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Experiments</h1>
+<div id="benchmark-dataset" class="section level2">
+<h2><span class="header-section-number">5.1</span> Benchmark dataset</h2>
+<p>There are 2 benchmark people usually use is Infant Health and Development Program (IHDP) and Jobs. The authors use those so there is no need to construct proxies. But to show the power of learning proxies, the authors proposed 2 other benchmarks is synthesis data and Twins.</p>
+<div id="ihdp" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> IHDP</h3>
+<p>Context:</p>
+<ul>
+<li>Treatment group will be provide special care and home visits from a trained provider. In the original study, the final cognitive test scores (CTS) is higher when they are treated.</li>
+<li>We care about the effect of <em>home visits by specialists</em> on <em>future cognitive test scores</em></li>
+<li>If t=1, child get treatment, t=0 is not.</li>
+</ul>
+<p>Description:</p>
+<ul>
+<li>IHDP consists of 6 continuous 19 binary covariates.</li>
+<li>Outcome is simulated</li>
+<li>Treatment and control group is unbalanced, 139 is treated, 608 in control.</li>
+<li>Outcome using in this paper is from Setting A from <a href="https://github.com/vdorie/npci" class="uri">https://github.com/vdorie/npci</a> (is the Setting B in <span class="citation">(Hill <a href="#ref-doi:10.1198/jcgs.2010.08162">2011</a>)</span>). Produce 1000 replications.</li>
+<li>Split train/val/test set with the same ratio as <span class="citation">(Shalit, Johansson, and Sontag <a href="#ref-shalit2016estimating">2016</a>)</span> for each replications.</li>
+<li>For each replication, the networks will be retrain and compute error and final results will be averaged.</li>
+<li>Outcome Y is simulated, distribution is Normal, nonlinear and not parallel across treatment conditions. Y is depend on X to satisfy ignorability.</li>
+</ul>
+<p>In my understanding, the graphical model will look like:
+<img src="imgs/2020-04-12-11-59-46.png" /></p>
+<p>2 main tasks: estimating the individual / population causal effects</p>
+<ul>
+<li><p>Individual treatment effect is Precision in Estimation of Heterogeneous Effect (PEHE) (reflects the ability to capture individual variation in treatment effects).</p>
+PEHE <span class="math inline">\(=\frac{1}{N} \sum_{i=1}^{N}\left(\left(y_{i 1}-y_{i 0}\right)-\left(\hat{y}_{i 1}-\hat{y}_{i 0}\right)\right)^{2},\)</span> where <span class="math inline">\(y_{1}, y_{0}\)</span> correspond to the true outcomes under <span class="math inline">\(t=1\)</span> and <span class="math inline">\(t=0,\)</span> respectively, and <span class="math inline">\(\hat{y}_{1}, \hat{y}_{0}\)</span> correspond to the outcomes estimated by our model.</li>
+<li><p>population causal effect: absolute error on the Average Treatment Effect (ATE)</p>
+<p><span class="math inline">\(\epsilon_{\mathrm{ATE}}=| \frac{1}{n} \sum_{i=1}^{n}\left(f\left(x_{i}, 1\right)-f\left(x_{i}, 0\right)\right)-\frac{1}{n} \sum_{i=1}^{n}\left(m_{1}\left(x_{i}\right)-\right.\left.m_{0}\left(x_{i}\right)\right) | .\)</span></p>
+<p>with <span class="math inline">\(m_{1}(x)=\mathbb{E}\left[Y_{1} | x\right], m_{0}(x)=\mathbb{E}\left[Y_{0} | x\right]\)</span></p></li>
+</ul>
+<p>Those above metrics the smaller the better
+<img src="imgs/2020-04-12-12-06-13.png" /></p>
+</div>
+<div id="jobs" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Jobs:</h3>
+<p>Pretty much the same as IHDP benchmark, except this is the real outcome from real life, not simulated.</p>
+<p>Evaluation:</p>
+<ul>
+<li>Use policy risk to replace ITE because we don’t know the other treatment. Thus, we don’t have groundtruth for ITE</li>
+<li>Population CE: use absolute error on the Average Treatment effect on the Treated (ATT) for the exact same reason.</li>
+</ul>
+<p>The authors didn’t public this dataset.</p>
+</div>
+<div id="synthesis-toy-data" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Synthesis toy data:</h3>
+<p>Read paper for this part, it’s not much content.</p>
+</div>
+<div id="binary-treatment-outcome-on-twins" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> Binary treatment outcome on Twins</h3>
+<p>Context:</p>
+<ul>
+<li>Data from twin births in the USA between 1989-1991, only chose twins which are the same sex, focused on twins such that both were born weighing less than 2kg</li>
+<li>The treatment t = 1 is being born the heavier twin</li>
+<li>The outcome corresponds to the mortality of each of the twins in their first year of life =&gt; could be considered as the two potential outcomes for each treatment</li>
+</ul>
+<p>=&gt; We want to know the effect of being born heavier on the mortality in first year.</p>
+<p>Description:</p>
+<ul>
+<li>Dataset of 11984 pairs of twins, for each twin pair we observed both the case t = 0 (lighter twin) and t = 1 (heavier twin)</li>
+<li>46 covariates: mother and father education, marital status, race and residence; number of previous births; pregnancy risk factors such as diabetes, renal disease, smoking and alcohol use; quality of care during pregnancy; whether the birth was at a hospital, clinic or home; and number of gestation weeks prior to birth.<br />
+</li>
+<li>More detail about each covariate is in my read data Twins notebook</li>
+<li>Missing value xử lý: For the features that had more than 20% missing values we assigned to the missing values a constant number that was the maximum of the existing values + 1. Essentially this creates a separate ‘nan category’ for those features. For the rest we used a most-frequent imputation strategy.</li>
+</ul>
+<p>Simulate 2 kind of trial:</p>
+<ul>
+<li>Observational study: selectively hide one of the two twins<br />
+</li>
+<li>Randomized trial: randomly hide one</li>
+</ul>
+<p>To simulate hidden confounding with proxies:</p>
+<ul>
+<li>Condition the treatment variable under highly correlated variable with outcome, the authors chose GESTAT10 (the define in paper is unclear to me why they choose w0,w1 that way, and the GESTAT10 itself is complicated too)</li>
+<li>To create proxies, the authors encode G10 1hot, replicate 3 times (unclear these are in the same data or split to retrain like IHDP). The reason authors choose 3 replicate because the references in the paper show that only 3 replicate is enough the recover the origin encoded variable.</li>
+<li>With each bit in 30bits above, randomly and independently flipped with prob varies from 0.05 to 0.5, latter indicating there is no direct information about the confounder.</li>
+</ul>
+<p>Note: In the public data, the authors give the raw data, haven’t encode G10 into 1hot. I assume 3 replicate is in the same data. I need to read more into reference papers to understand which one is correct.</p>
+<p>The graphical model will be like:</p>
+<p><img src="imgs/2020-04-12-12-22-29.png" /></p>
+<p>Groundtruth: mortality rate for the lighter twin (t=0) is 18.9%, and for the heavier (t=1) 16.4%, for an average treatment effect (ATE) of -2.5%</p>
+<p>2 tasks inferring:</p>
+<ul>
+<li>the mortality of the unobserved twin (counterfactual): Predict alive or death, then get accuracy, then draw AUC as below pictures</li>
+<li><span class="math inline">\(\epsilon_{A T E}=|A \hat{T} E-A T E |\)</span>, with <span class="math inline">\(A \hat{T} E\)</span> is the ratio of outcome t=1 and t=0 substract eachother. (ratio of alive cases)</li>
+</ul>
+<p>In comparision to other methods, in Figure (a), the higher the better, and (b) the lower the better.
+<img src="imgs/2020-04-12-12-28-10.png" /></p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-doi:10.1198/jcgs.2010.08162">
+<p>Hill, Jennifer L. 2011. “Bayesian Nonparametric Modeling for Causal Inference.” <em>Journal of Computational and Graphical Statistics</em> 20 (1): 217–40. <a href="https://doi.org/10.1198/jcgs.2010.08162">https://doi.org/10.1198/jcgs.2010.08162</a>.</p>
+</div>
+<div id="ref-shalit2016estimating">
+<p>Shalit, Uri, Fredrik D. Johansson, and David Sontag. 2016. “Estimating Individual Treatment Effect: Generalization Bounds and Algorithms.” <a href="http://arxiv.org/abs/1606.03976">http://arxiv.org/abs/1606.03976</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="CEVAE.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["notebookCEVAE.pdf", "notebookCEVAE.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
